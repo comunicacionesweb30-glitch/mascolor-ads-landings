@@ -2,6 +2,7 @@
   "rewrites": [
     { "source": "/atrapamugre", "destination": "/atrapamugre.html" },
     { "source": "/medellin", "destination": "/medellin.html" },
-    { "source": "/antifatiga", "destination": "/antifatiga.html" }
+    { "source": "/antifatiga", "destination": "/antifatiga.html" },
+    { "source": "/publicitario-medellin", "destination": "/publicitario-medellin.html" }
   ]
 }
