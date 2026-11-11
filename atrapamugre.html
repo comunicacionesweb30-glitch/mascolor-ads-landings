@@ -26,7 +26,10 @@
 <!-- OpenAI Ads (ChatGPT) Measurement Pixel -->
 <script>!function(w,d,s,u){if(w.oaiq)return;var q=function(){q.q.push(arguments)};q.q=[];w.oaiq=q;var j=d.createElement(s);j.async=1;j.src=u;var f=d.getElementsByTagName(s)[0];f.parentNode.insertBefore(j,f)}(window,document,"script","https://bzrcdn.openai.com/sdk/oaiq.min.js");oaiq("init",{pixelId:"G74qqDXmneLPEh3VQqLJMG",debug:true});
 oaiq("measure","page_viewed",{type:"contents",contents:[{id:location.pathname,name:document.title,content_type:"page"}]});
-document.addEventListener("click",function(e){var a=e.target.closest&&e.target.closest('a[href*="wa.me"]');if(a&&a.id!=="med-wa-link")oaiq("measure","lead_created",{type:"customer_action"});},true);</script>
+(function(){var last=0;function lead(){var n=Date.now();if(n-last<3000)return;last=n;oaiq("measure","lead_created",{type:"customer_action"});}
+var re=/wa\.me|whatsapp\.com\/send|api\.whatsapp\.com/i;
+document.addEventListener("click",function(e){var a=e.target.closest&&e.target.closest("a[href]");if(a&&a.id!=="med-wa-link"&&re.test(a.href))lead();},true);
+var dl=window.dataLayer=window.dataLayer||[],p=dl.push;dl.push=function(o){try{if(o&&o.event==="whatsapp_click")lead();}catch(x){}return p.apply(dl,arguments);};})();</script>
 </head>
 <body>
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-T687QRM" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
