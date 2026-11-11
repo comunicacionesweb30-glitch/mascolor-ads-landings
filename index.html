@@ -1248,12 +1248,25 @@ if(typeof origPv==='function'){
     var source = params.get('utm_source') || params.get('gad_source') || 'direct';
     var campaign = params.get('utm_campaign') || 'none';
     var term = params.get('utm_term') || params.get('keyword') || '';
-    var gclid = params.get('gclid') || '';
+    // Click IDs: Google (gclid / gbraid / wbraid o cookie _gcl_aw) y ChatGPT Ads (oppref o cookie __oppref)
+    var gclid = params.get('gclid') || params.get('gbraid') || params.get('wbraid') || '';
+    if (!gclid) {
+      var aw = getCookie('_gcl_aw'); // formato GCL.<timestamp>.<gclid>
+      if (aw) gclid = aw.split('.').slice(2).join('.');
+    }
+    var oai = params.get('oppref') || getCookie('__oppref') || '';
+    if (source === 'direct') {
+      if (oai) source = 'chatgpt';
+      else if (gclid) source = 'google';
+    }
+    var clean = function(v) { return String(v).replace(/[\[\]\s]/g, ''); };
 
-    // Build ref tag
+    // Build ref tag — el ERP (TapetesRe) lo lee al capturar el lead:
+    // [ref: fuente/campaña/keyword g:<gclid> oai:<oppref>]
     var ref = '[ref: ' + source + '/' + campaign;
     if (term) ref += '/' + term;
-    if (gclid) ref += '/gclid:' + gclid.substring(0, 12);
+    if (gclid) ref += ' g:' + clean(gclid);
+    if (oai) ref += ' oai:' + clean(oai);
     ref += ']';
 
     // Update all WhatsApp links

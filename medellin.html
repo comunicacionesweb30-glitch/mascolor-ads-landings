@@ -1222,6 +1222,13 @@ var dl=window.dataLayer=window.dataLayer||[],p=dl.push;dl.push=function(o){try{i
       tipo_proyecto:document.getElementById('med-tipo').value.trim()||'Tapete con logo Medellín',
       descripcion:document.getElementById('med-desc').value.trim(),
       _honeypot:document.getElementById('med-hp').value,
+      utm_source:(function(){var p=new URLSearchParams(location.search);return p.get('utm_source')||(p.get('oppref')?'chatgpt':(p.get('gclid')||p.get('gbraid')||p.get('wbraid'))?'google':null)})(),
+      utm_medium:new URLSearchParams(location.search).get('utm_medium'),
+      utm_campaign:new URLSearchParams(location.search).get('utm_campaign'),
+      utm_term:new URLSearchParams(location.search).get('utm_term'),
+      gclid:(function(){var p=new URLSearchParams(location.search),g=p.get('gclid')||p.get('gbraid')||p.get('wbraid');if(!g){var m=document.cookie.match(/(?:^|; )_gcl_aw=([^;]+)/);if(m)g=m[1].split('.').slice(2).join('.')}return g?g.slice(0,300):null})(),
+      oppref:(function(){var o=new URLSearchParams(location.search).get('oppref');if(!o){var m=document.cookie.match(/(?:^|; )__oppref=([^;]+)/);if(m)o=decodeURIComponent(m[1])}return o?o.slice(0,300):null})(),
+      referrer:(document.referrer||'').slice(0,500)||null,
     };
 
     fetch(API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)})
