@@ -9,6 +9,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Space+Mono:wght@700&display=swap" rel="stylesheet">
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-T687QRM');</script>
+<!-- OpenAI Ads (ChatGPT) Measurement Pixel -->
+<script>!function(w,d,s,u){if(w.oaiq)return;var q=function(){q.q.push(arguments)};q.q=[];w.oaiq=q;var j=d.createElement(s);j.async=1;j.src=u;var f=d.getElementsByTagName(s)[0];f.parentNode.insertBefore(j,f)}(window,document,"script","https://bzrcdn.openai.com/sdk/oaiq.min.js");oaiq("init",{pixelId:"G74qqDXmneLPEh3VQqLJMG",debug:true});
+oaiq("measure","page_viewed",{type:"contents",contents:[{id:location.pathname,name:document.title,content_type:"page"}]});
+document.addEventListener("click",function(e){var a=e.target.closest&&e.target.closest('a[href*="wa.me"]');if(a&&a.id!=="med-wa-link")oaiq("measure","lead_created",{type:"customer_action"});},true);</script>
 </head>
 <body>
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-T687QRM" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
@@ -1014,6 +1018,7 @@
       if(!r.ok)throw new Error(r.data.error||'Error al enviar');
       document.getElementById('med-form-wrapper').style.display='none';
       var s=document.getElementById('med-success');s.style.display='block';
+      if(window.oaiq)oaiq('measure','lead_created',{type:'customer_action'});
       document.getElementById('med-wa-link').href='https://wa.me/'+WA+'?text='+encodeURIComponent('Hola, acabo de enviar una solicitud de tapetes publicitarios desde la web. Mi nombre es '+nombre+' y estoy en Medellín.');
     })
     .catch(function(err){
